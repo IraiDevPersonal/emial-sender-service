@@ -1,0 +1,39 @@
+{
+	"name": "email-sender-service",
+	"version": "1.0.0",
+	"description": "",
+	"type": "module",
+	"main": "main.js",
+	"scripts": {
+		"dev": "tsx watch src/main.ts",
+		"build": "tsc --noEmit false",
+		"start": "node dist/main.js",
+		"lint": "biome lint src/",
+		"lint:fix": "biome lint --write src/",
+		"format": "biome format src/",
+		"format:write": "biome format --write src/",
+		"check": "biome check src/",
+		"check:fix": "biome check --write src/",
+		"type-check": "tsc --noEmit"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"packageManager": "pnpm@10.16.1",
+	"devDependencies": {
+		"@biomejs/biome": "^2.2.4",
+		"@types/cors": "^2.8.19",
+		"@types/express": "^5.0.3",
+		"@types/node": "^24.5.2",
+		"tsx": "^4.20.5",
+		"typescript": "^5.9.2"
+	},
+	"dependencies": {
+		"cors": "^2.8.5",
+		"dotenv": "^17.2.2",
+		"env-var": "^7.5.0",
+		"express": "^5.1.0",
+		"helmet": "^8.1.0",
+		"winston": "^3.17.0"
+	}
+}
