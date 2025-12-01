@@ -8,6 +8,7 @@
 		"dev": "tsx watch src/main.ts",
 		"build": "tsc --noEmit false",
 		"start": "node dist/main.js",
+		"exec": "tsx src/main.ts",
 		"lint": "biome lint src/",
 		"lint:fix": "biome lint --write src/",
 		"format": "biome format src/",
@@ -25,6 +26,7 @@
 		"@types/cors": "^2.8.19",
 		"@types/express": "^5.0.3",
 		"@types/node": "^24.5.2",
+		"@types/nodemailer": "^7.0.4",
 		"tsx": "^4.20.5",
 		"typescript": "^5.9.2"
 	},
@@ -34,6 +36,7 @@
 		"env-var": "^7.5.0",
 		"express": "^5.1.0",
 		"helmet": "^8.1.0",
+		"nodemailer": "^7.0.11",
 		"winston": "^3.17.0"
 	}
 }

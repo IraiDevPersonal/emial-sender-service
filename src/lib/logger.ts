@@ -4,7 +4,7 @@ import { ENVS } from "@/lib/config";
 export const logger = winston.createLogger({
 	level: ENVS.LOG_LEVEL,
 	format: winston.format.combine(
-		winston.format.timestamp(),
+		// winston.format.timestamp(),
 		winston.format.errors({ stack: true }),
 		winston.format.json()
 	),
