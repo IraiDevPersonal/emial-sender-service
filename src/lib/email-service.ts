@@ -30,21 +30,22 @@ export class EmailService {
 
 	async sendEmail({ to, subject, html, fromName, text, attachments }: SendEmailOptions) {
 		try {
-			const mailOptions = {
+			const mail = {
 				from: `"${fromName}" <${ENVS.EMAIL_USER}>`,
-				to,
-				subject,
 				text: text || "",
-				html,
 				attachments,
+				subject,
+				html,
+				to,
 			};
 
-			const info = await this.transporter.sendMail(mailOptions);
-			console.log("Email enviado:", info.messageId);
+			const info = await this.transporter.sendMail(mail);
 			return { success: true, messageId: info.messageId };
 		} catch (error) {
-			console.error("Error al enviar email:", error);
-			throw error;
+			if (error instanceof Error) {
+				throw error;
+			}
+			throw new Error("Error al enviar email");
 		}
 	}
 
@@ -52,10 +53,10 @@ export class EmailService {
 	async verifyConnection() {
 		try {
 			await this.transporter.verify();
-			console.log("Servidor listo para enviar emails");
+			console.log("✅ Servidor listo para enviar emails");
 			return true;
 		} catch (error) {
-			console.error("Error de conexión:", error);
+			console.error("❌ Error de conexión:", { error });
 			return false;
 		}
 	}

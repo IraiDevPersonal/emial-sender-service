@@ -1,6 +1,5 @@
 import * as fs from "node:fs";
 import { EmailService } from "./lib/email-service";
-import { logger } from "./lib/logger";
 
 type Options = {
 	to: string[];
@@ -31,8 +30,17 @@ export class App {
 	}
 
 	async execute() {
-		this.emailService.verifyConnection();
-		await Promise.all(this.to.map((to) => this.sendEmail(to)));
+		const ok = await this.emailService.verifyConnection();
+		if (!ok) return;
+
+		const results = await Promise.allSettled(this.to.map((to) => this.sendEmail(to)));
+
+		const success = results.filter((r) => r.status === "fulfilled").length;
+		const failed = results.filter((r) => r.status === "rejected").length;
+
+		console.log(
+			`\n📊 Resumen: ${success} exitosos, ${failed} fallidos de ${this.to.length} total`
+		);
 	}
 
 	private async sendEmail(to: string) {
@@ -46,9 +54,10 @@ export class App {
 			};
 
 			await this.emailService.sendEmail(payload);
-			logger.info("Correo enviado a: ", { to: payload.to });
+			console.log("✅ Correo enviado a:", to);
 		} catch (error) {
-			logger.error("Error enviando correo", error);
+			console.error("❌ Error enviando correo a:", to, error);
+			throw error;
 		}
 	}
 }

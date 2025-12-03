@@ -1,7 +1,10 @@
 import { App } from "./app";
+import { ENVS } from "./lib/config";
+
+const isTest = true;
 
 const iraidevApp = new App({
-	to: ["dev.iarriagada@gmail.com"],
+	to: ["ignacio.arr01@gmail.com", ...(isTest ? [] : ENVS.DESTINATIONS)],
 	template: "./templates/iarriagada-template.html",
 	email: {
 		fromName: "Ignacio Arriagada",
