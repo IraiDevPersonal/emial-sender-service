@@ -9,4 +9,5 @@ export const ENVS = {
 	EMAIL_USER: envVar.get("EMAIL_USER").required().asString(),
 	EMAIL_PASS: envVar.get("EMAIL_PASS").required().asString(),
 	DESTINATIONS: envVar.get("DESTINATIONS").required().asArray(),
+	IS_TEST: envVar.get("IS_TEST").default("true").asBool(),
 };
